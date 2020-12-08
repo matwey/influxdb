@@ -24,6 +24,7 @@ type MetaClient interface {
 	ShardGroupsByTimeRange(database, policy string, min, max time.Time) (a []meta.ShardGroupInfo, err error)
 	CreateRetentionPolicy(database string, spec *meta.RetentionPolicySpec, makeDefault bool) (*meta.RetentionPolicyInfo, error)
 	UpdateRetentionPolicy(database, name string, rpu *meta.RetentionPolicyUpdate, makeDefault bool) error
+	DropRetentionPolicy(database, name string) error
 	CreateDatabase(name string) (*meta.DatabaseInfo, error)
 	CreateDatabaseWithRetentionPolicy(name string, spec *meta.RetentionPolicySpec) (*meta.DatabaseInfo, error)
 	DeleteShardGroup(database, policy string, id uint64) error

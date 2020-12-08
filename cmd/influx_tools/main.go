@@ -12,6 +12,7 @@ import (
 	"github.com/influxdata/influxdb/cmd/influx_tools/compact"
 	"github.com/influxdata/influxdb/cmd/influx_tools/export"
 	genexec "github.com/influxdata/influxdb/cmd/influx_tools/generate/exec"
+	"github.com/influxdata/influxdb/cmd/influx_tools/droprp"
 	geninit "github.com/influxdata/influxdb/cmd/influx_tools/generate/init"
 	"github.com/influxdata/influxdb/cmd/influx_tools/help"
 	"github.com/influxdata/influxdb/cmd/influx_tools/importer"
@@ -66,6 +67,11 @@ func (m *Main) Run(args ...string) error {
 		c := export.NewCommand(&ossServer{logger: zap.NewNop()})
 		if err := c.Run(args); err != nil {
 			return fmt.Errorf("export failed: %s", err)
+		}
+	case "droprp":
+		c := droprp.NewCommand(&ossServer{logger: zap.NewNop()})
+		if err := c.Run(args); err != nil {
+			return fmt.Errorf("droprp failed: %s", err)
 		}
 	case "import":
 		c := importer.NewCommand(&ossServer{logger: zap.NewNop()})
